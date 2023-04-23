@@ -1,0 +1,104 @@
+/* Forms */
+.form-group {
+    margin-bottom: 1.5rem; }
+  
+  .input-group-append,
+  .input-group-prepend {
+    color: #c9c8c8;
+    width: auto;
+    border: none; }
+    .input-group-append .input-group-text,
+    .input-group-prepend .input-group-text {
+      border-color: #ebedf2;
+      padding: 0.94rem 0.75rem;
+      color: #c9c8c8; }
+  
+  .form-control {
+    border: 1px solid #ebedf2;
+    font-family: "ubuntu-regular", sans-serif;
+    font-size: 0.8125rem; }
+    .form-control:focus {
+      background-color: #ffffff;
+      color: #000000;
+      outline: none; 
+    }
+  
+  select.form-control {
+    padding: .4375rem .75rem;
+    border: 0;
+    outline: 1px solid #ebedf2;
+    color: #c9c8c8; }
+    select.form-control:focus {
+      outline: 1px solid #ebedf2; }
+    select.form-control.border-primary {
+      outline: 1px solid #b66dff; }
+      select.form-control.border-primary:focus {
+        outline: 1px solid #b66dff; }
+    select.form-control.border-secondary, select.form-control.loader-demo-box {
+      outline: 1px solid #c3bdbd; }
+      select.form-control.border-secondary:focus, select.form-control.loader-demo-box:focus {
+        outline: 1px solid #c3bdbd; }
+    select.form-control.border-success {
+      outline: 1px solid #1bcfb4; }
+      select.form-control.border-success:focus {
+        outline: 1px solid #1bcfb4; }
+    select.form-control.border-info {
+      outline: 1px solid #198ae3; }
+      select.form-control.border-info:focus {
+        outline: 1px solid #198ae3; }
+    select.form-control.border-warning {
+      outline: 1px solid #fed713; }
+      select.form-control.border-warning:focus {
+        outline: 1px solid #fed713; }
+    select.form-control.border-danger {
+      outline: 1px solid #fe7c96; }
+      select.form-control.border-danger:focus {
+        outline: 1px solid #fe7c96; }
+    select.form-control.border-light {
+      outline: 1px solid #f8f9fa; }
+      select.form-control.border-light:focus {
+        outline: 1px solid #f8f9fa; }
+    select.form-control.border-dark {
+      outline: 1px solid #3e4b5b; }
+      select.form-control.border-dark:focus {
+        outline: 1px solid #3e4b5b; }
+  
+  .form-group label {
+    font-size: 0.875rem;
+    line-height: 1;
+    vertical-align: top;
+    margin-bottom: .5rem; }
+  
+  .form-group.has-danger .form-control {
+    border-color: #fe7c96; }
+  
+  .form-group .file-upload-default {
+    visibility: hidden;
+    position: absolute; }
+  
+  .form-group .file-upload-info {
+    background: transparent; }
+
+
+/* .form-box{
+	width: 380px;
+	height: auto;
+	position: relative;
+	margin: 6% auto;
+	background: #fff;
+	padding: 5px;
+    border:1px ridge grey;
+    box-shadow: 2px 2px grey;
+}
+
+.form-box h3{
+    text-align: center;
+    font-size: 30px;
+    background: gray;
+    color: #ffffff;
+}
+
+.form-box p{
+    text-align: center;
+    padding-top: 10px;
+} */

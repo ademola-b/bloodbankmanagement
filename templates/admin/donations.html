@@ -1,0 +1,91 @@
+{% extends 'blood/header.html' %}
+{% load static %}
+{% block title %}
+    Donations
+{% endblock title %}
+{% block head %}
+
+    {% comment %} <link href="{% static 'assets/css/bootstrap.css' %} " rel="stylesheet" /> {% endcomment %}
+{% endblock head %}
+
+{% block content %}
+{% include 'admin/nav.html' %}
+<div id="wrapper">
+		{% include 'admin/aside.html' %}
+        
+            <div id="page-wrapper">
+                <div class="header">	 
+                    <h1 class="page-header">
+                        Donations
+                    </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'admin_page:index' %}">Home</a></li>
+                    <li><a href="{% url 'admin_page:donors' %}">Donors</a></li>
+                    <li class="active">Donations</li>
+                </ol> 
+                                
+            </div>
+
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                {% include 'blood/messages2.html' %}
+                                
+                            {% if donations %}
+                            <table class="table table-bordered table-striped centered">
+                                    
+                                    <tr>
+                                        <th>Donor's Name</th>
+                                        <th>Donor's Disease</th>
+                                        <th>Bloodgroup</th>
+                                        <th>Unit</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        <th>Stock Status</th>
+                                    </tr>
+                                    {% for donation in donations %}
+                                        <tr>
+                                            <td> {{donation.donor.user.first_name|title}} {{donation.donor.user.last_name|title}} </td>
+                                            <td> {{donation.disease}} </td>
+                                            <td> {{donation.bloodgroup}} </td>
+                                            <td> {{donation.unit}} </td>
+                                            <td> {{donation.status}} </td>
+                                            {% if donation.status == 'pending' %}
+                                                <td> 
+                                                    <a href="{% url 'admin_page:approve_donation' donation.pk %}" class="btn btn-success">Approve</a> &emsp; 
+                                                    <a href="{% url 'admin_page:reject_donation' donation.pk %}" class="btn btn-danger">Reject</a> </td>
+                                            {% elif donation.status == 'approved' or donation.status == 'rejected' %}
+                                                    <td><a href="{% url 'admin_page:rollback_donation' donation.pk %}" class="btn btn-warning">Rollback</a></td>
+                                            {% else %}
+                                                <td>  </td>
+                                            {% endif %} </td>
+                                            {% if donation.status == 'approved' %}
+                                                <td> <span style ="background-color: green; color: white">{{donation.unit}} unit added to stock</span> </td> 
+                                            {% elif donation.status == 'rejected' %}
+                                                <td><span style ="background-color: blue; color: white">0 unit added to stock</span></td>
+                                            {% else %}
+                                                <td><span style ="background-color: orange; color: white">no action taken</span></td>    
+                                            {% endif %}
+                                           
+                                        </tr>
+                                    {% endfor %}
+                            </table>
+                                        
+                                {% else %}
+                                    <h4>NO DONATIONS</h4>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+

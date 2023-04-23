@@ -1,0 +1,19 @@
+
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a class="active-menu waves-effect waves-dark" href=" {% url 'patient:index' %}"><i class="fa fa-dashboard"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url 'patient:request_history' %}" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Request History</a>
+            </li>
+            <li>
+                <a href="{% url 'patient:available_blood' %}" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Available Blood Donations</a>
+            </li>
+            
+        </ul>
+
+    </div>
+</nav>

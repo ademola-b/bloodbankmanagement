@@ -1,0 +1,66 @@
+{% extends 'blood/header.html' %}
+
+{% block title %}
+    Donors
+{% endblock title %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include 'admin/nav.html' %}
+		{% include 'admin/aside.html' %}
+        
+            <div id="page-wrapper">
+                <div class="header">	 
+                    <h1 class="page-header">
+                        Donors
+                    </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'admin_page:index' %}">Home</a></li>
+                    <li class="active">Donors</li>
+                </ol> 
+                                
+            </div>
+
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                {% if donors %}
+                                <table class="table table-bordered table-striped centered">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Profile Picture</th>
+                                        <th>Bloodgroup</th>
+                                        <th>Address</th>
+                                        <th>Phone No.</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    {% for donor in donors %}
+                                        <tr>
+                                            <td> {{donor.user.first_name|title}} {{donor.user.last_name|title}} </td>
+                                            <td> <img src="{{donor.profile_pic.url}}" alt="profile_pic" width="100" height="100" style="box-fit:cover"> </td>
+                                            <td> {{donor.bloodgroup}} </td>
+                                            <td> {{donor.address}} </td>
+                                            <td> {{donor.mobile}} </td>
+                                            <td> <a href="#" class="btn btn-danger">Delete</a> </td>
+                                        </tr>
+                                    {% endfor %}
+                            </table>
+                                        
+                                {% else %}
+                                    <h4>NO DONORS</h4>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+

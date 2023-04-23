@@ -1,0 +1,87 @@
+{% extends 'blood/header.html' %} 
+
+{% block title %}
+    Requests
+{% endblock title %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include 'admin/nav.html' %}
+		{% include 'admin/aside.html' %}
+        
+        <div id="page-wrapper">
+            
+            <div class="header">	 
+                <h1 class="page-header">
+                    Requests
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'admin_page:index' %}">Home</a></li>
+                    <li class="active">Requests</li>
+                </ol> 
+                
+            </div>
+            
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                {% include 'blood/messages2.html' %}
+                                {% if requests %}
+                                <table class="table table-bordered table-striped centered">
+                                    <tr>
+                                        <th>Request By</th>
+                                        <th>Reason</th>
+                                        <th>Bloodgroup</th>
+                                        <th>Unit</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        <th> Mssg </th>
+                                    </tr>
+                                    {% for req in requests %}
+                                        <tr>
+                                            <td> {{req.request_by.first_name|title}} {{req.request_by.last_name|title}} </td>
+                                            <td> {{req.reason}} </td>
+                                           
+                                            <td> {{req.bloodgroup}} </td>
+                                            <td> {{req.unit}} </td>
+                                            <td> {{req.status}} </td>
+                                            {% if req.status == 'pending' %}
+                                                <td> 
+                                                    <a href="{% url 'admin_page:approve_request' req.pk %}" class="btn btn-success">Approve</a> &emsp; 
+                                                    <a href="{% url 'admin_page:reject_request' req.pk %}" class="btn btn-danger">Reject</a> </td>
+                                            {% elif req.status == 'approved' or req.status == 'rejected' %}
+                                                <td> <a href="{% url 'admin_page:rollback_request' req.pk %}" class="btn btn-warning">Rollback</a> </td>
+                                            {% else %}
+                                                <td>  </td>
+                                            {% endif %} </td>
+                                            <td>
+                                                {% if req.status == 'approved' %}
+                                                    <span style ="background-color: green; color: white">{{req.unit}} unit removed from blood stock</span>
+                                                {% elif req.status == 'rejected' %}
+                                                    <span style ="background-color: red; color: white">0 unit removed from blood stock</span>
+                                                {% else %}
+                                                <span style ="background-color: blue; color: white">no action taken</span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                            </table>
+                                        
+                                {% else %}
+                                    <h4>NO REQUEST</h4>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+

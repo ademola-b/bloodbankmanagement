@@ -1,0 +1,70 @@
+{% extends 'blood/header.html' %}
+
+{% block title %}
+    Request History
+{% endblock title %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include 'donor/nav.html' %}
+		{% include 'blood/aside.html' %}
+        
+            <div id="page-wrapper">
+                <div class="header">	 
+                    <h1 class="page-header">
+                        My Requests
+                    </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{% url 'patient:available_blood' %}">Available Blood Donation</a></li>
+                    <li class="active">My Request</li>
+                </ol> 
+                                
+            </div>
+
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                {% if requests %}
+                                <table class="table table-bordered" style="padding: 100px;">
+                                    <tr>
+                                        <th>Patient Name</th>
+                                        <th>Patient Age</th>
+                                        <th>Reason</th>
+                                        <th>Blood Group</th>
+                                        <th>Unit</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        {% comment %} <th>Action</th> {% endcomment %}
+                                    </tr>
+                                    {% for req in requests %}
+                                        <tr>
+                                            <td> {{req.request_by.first_name}} </td>
+                                            <td> {{req.request_by.patient.age}} </td>
+                                            <td> {{req.reason}} </td>
+                                            <td> {{req.bloodgroup}} </td>
+                                            <td> {{req.unit}} </td>
+                                            <td> {{req.date}} </td>
+                                            <td> {{req.status}} </td>
+                                            {% comment %} <td> <a href="{% url 'patient:delete_request' req.pk %}" class="btn btn-danger">DELETE</a> </td> {% endcomment %}
+                                        </tr>     
+                                    {% endfor %}
+                                </table>
+                                {% else %}
+                                    <h4>NO REQUEST</h4>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+

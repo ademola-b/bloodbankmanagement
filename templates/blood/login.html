@@ -1,0 +1,38 @@
+{% extends 'blood/login-header.html' %}
+
+{% block title %}
+    Login Page
+{% endblock title %}
+
+{% block content %}
+{% include "blood/navbar.html" %}
+
+<br/><br/><br/>
+
+    <div id="page-inner">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-content">
+                        <form method="POST" class="col s12">
+                            {% include 'blood/messages.html' %}
+
+                            {% if form.errors %}
+                                <div class="alert alert-danger">
+                                    {{form.errors}}
+                                </div>
+                            {% endif %}
+                            {% csrf_token %}
+                            {% for field in form %}
+                                {{ field.label }} {{field}}
+                                <br>
+                            {% endfor %}
+                            <button type="submit" class="btn btn-primary">SUBMIT</button>
+                        </form>
+                    </div>
+                </div>  
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

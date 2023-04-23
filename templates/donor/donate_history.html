@@ -1,0 +1,66 @@
+{% extends 'blood/header.html' %}
+
+{% block title %}
+    Donate History
+{% endblock title %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include 'donor/nav.html' %}
+		{% include 'blood/aside.html' %}
+        
+            <div id="page-wrapper">
+                <div class="header">	 
+                    <h1 class="page-header">
+                        My Donations
+                    </h1>
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="{% url 'donor:donate_blood' %}">Make Donation</a></li>
+                    <li class="active">My Donations</li>
+                </ol> 
+                                
+            </div>
+
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                {% if donations %}
+                                <table class="table table-bordered" style="padding: 100px;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Date</th>
+                                        <th>Disease</th>
+                                        <th>Bloodgroup</th>
+                                        <th>Unit</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    {% for don in donations %}
+                                        <tr>
+                                            <td> {{don.request_by.first_name}} </td>
+                                            <td> {{don.date}} </td>
+                                            <td> {{don.disease}} </td>
+                                            <td> {{don.bloodgroup}} </td>
+                                            <td> {{don.unit}} </td>
+                                            <td> {{don.status}} </td>
+                                        </tr>     
+                                    {% endfor %}
+                                </table>
+                                {% else %}
+                                    <h4>YOU HAVE NOT MADE ANY DONATIONS</h4>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+

@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>
+        {% block title %}{% endblock title %}
+    </title>
+    {% block head %}{% endblock head %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blood Bank Management System</title> 
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'assets/materialize/css/materialize.min.css' %} " media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link href="{% static 'assets/css/bootstrap.css' %} " rel="stylesheet" />
+    {% comment %} <link href="{% static 'assets/css/bootstrap.min.css' %} " rel="stylesheet" /> {% endcomment %}
+    <link href="{% static 'assets/css/all-icon.css' %} " rel="stylesheet" />
+    <link href="{% static 'css/main.css' %} " rel="stylesheet" />
+    <link href="{% static 'css/form.css' %} " rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="{% static 'assets/css/font-awesome.css' %} " rel="stylesheet" />
+    <!-- Morris Chart Styles-->
+    <link href="{% static 'assets/js/morris/morris-0.4.3.min.css' %} " rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link href="{% static 'assets/css/custom-styles.css' %} " rel="stylesheet" />
+    
+    <link rel="stylesheet" href="{% static 'assets/fonts/boxicons.css' %}"> 
+    
+    
+</head>
+<body>
+    {% block content %}
+        {% comment %} {% include 'blood/messages.html' %} {% endcomment %}
+    
+    {% endblock content %}
+</body>
+</html>

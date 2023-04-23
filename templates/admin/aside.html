@@ -1,0 +1,28 @@
+
+<nav class="navbar-default navbar-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a class="active-menu waves-effect waves-dark" href=" {% url 'admin_page:index' %}"><i class="bx bxs-dashboard bx-md"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="{% url 'admin_page:donors' %}" class="waves-effect waves-dark"><i class="bx bxs-donate-blood bx-md"></i> Donors</a>
+            </li>
+            <li>
+                <a href="{% url 'admin_page:patients' %}" class="waves-effect waves-dark"><i class="bx bxs-bed bx-md"></i> Patients</a>
+            </li>
+            <li>
+                <a href="{% url 'admin_page:donations' %}" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Donations</a>
+            </li>
+            <li>
+                <a href="{% url 'admin_page:requests' %}" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> Requests</a>
+            </li>
+            <li>
+                <a href="{% url 'admin_page:blood_stock' %}" class="waves-effect waves-dark"><i class="bx bxs-droplet bx-md"></i> Blood Stock</a>
+            </li>
+            
+        </ul>
+
+    </div>
+</nav>

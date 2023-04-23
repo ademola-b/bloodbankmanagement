@@ -1,0 +1,12 @@
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-{% if message.tags == 'success' %}success {% elif message.tags == 'warning' %}danger {% else %}warning{% endif %}" role="alert">
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <p aria-hidden="true">&times;</p>
+            </button> 
+        </div>
+    {% endfor %}
+{% endif %}

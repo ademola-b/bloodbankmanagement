@@ -1,0 +1,62 @@
+v{% extends 'blood/header.html' %}
+
+{% block title %}
+    Blood Stock
+{% endblock title %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include 'admin/nav.html' %}
+		{% include 'admin/aside.html' %}
+        
+            <div id="page-wrapper">
+                <div class="header">	 
+                    <h1 class="page-header">
+                        Blood Stock
+                    </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'admin_page:index' %}">Home</a></li>
+                    <li class="active">Blood Stock</li>
+                </ol> 
+                                
+            </div>
+
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                {% if blood %}
+                                <table class="table table-bordered table-striped centered">
+                                    <tr>
+                                        <th>Bloodgroup</th>
+                                        <th>Unit</th>
+                                    </tr>
+                                    {% for bld in blood %}
+                                        <tr>
+                                            <td> {{bld.bloodgroup}} </td>
+                                            <td> {{bld.unit}} </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tr style="background-color: red; color: white">
+                                        <td> Total Unit </td>
+                                        <td >{{bld}}</td>
+                                    </tr>
+                            </table>
+                                        
+                                {% else %}
+                                    <h4>NO RECORD OF ANY BLOOD YET</h4>
+                                {% endif %}
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+

@@ -1,0 +1,52 @@
+{% extends 'blood/header.html' %}
+
+{% block title %}
+    Donate Blood
+{% endblock title %}
+
+{% block content %}
+    <div id="wrapper">
+        {% include 'donor/nav.html' %}
+		{% include 'blood/aside.html' %}
+
+        <div id="page-wrapper">
+            <div class="header"> 
+                <h1 class="page-header">
+                   Donate Blood 
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="{% url 'patient:index' %}">Home</a></li>
+                    <li class="active">Donate Blood</li>
+                </ol>            
+            </div>
+
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-content">
+                                <form method="POST">
+                                    {% include 'blood/messages2.html' %}
+    
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                    <div class="form-group">
+                                        {{ field.label|title }}
+                                        {{field}}
+                                    </div>
+                                    {% endfor %}
+                                    <button type="submit" class="btn btn-primary">SUBMIT</button>
+                                 </form>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+		{% include 'blood/js_scripts.html' %}
+{% endblock content %}
+
+
+
