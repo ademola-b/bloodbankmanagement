@@ -39,7 +39,7 @@
                                     </tr>
                                     {% for don in donations %}
                                         <tr>
-                                            <td> {{don.request_by.first_name}} </td>
+                                            <td> {{don.donor.get_name}} </td>
                                             <td> {{don.date}} </td>
                                             <td> {{don.disease}} </td>
                                             <td> {{don.bloodgroup}} </td>

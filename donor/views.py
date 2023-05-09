@@ -61,3 +61,7 @@ class DonateHistory(LoginRequiredMixin, ListView):
     model = BloodDonate
     template_name = 'donor/donate_history.html'
     context_object_name = 'donations'
+
+    def get_queryset(self):
+        return self.model.objects.filter(donor = self.request.user.donor)
+    

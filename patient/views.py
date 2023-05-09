@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Sum
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views import View
@@ -18,6 +19,7 @@ def homepage(request):
     try:
         patient = Patient.objects.get(user = request.user.id)
         user = request.user.id
+        bld = BloodStock.objects.filter(bloodgroup = patient.bloodgroup).aggregate(Sum('unit'))
     except:
         messages.warning(request, 'Account not found')
         return redirect('accts:login')
@@ -27,8 +29,8 @@ def homepage(request):
         'pending_request': BloodRequest.objects.filter(request_by = user, status = 'pending').count(),
         'approved_request': BloodRequest.objects.filter(request_by = user, status='approved').count(),
         'rejected_request': BloodRequest.objects.filter(request_by = user, status='rejected').count(),
+        'available_blood': bld['unit__sum'],
         }
-    # print(dict['pending_request'])
     return render(request, 'blood/dashboard.html', dict)
 
 
