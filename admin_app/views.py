@@ -30,7 +30,7 @@ class HomePageView(ListView):
         context["approved_donations"] = BloodDonate.objects.filter(status='approved').count()
         context["rejected_donations"] = BloodDonate.objects.filter(status='rejected').count()
         context["bld"] = bld['unit__sum']
-        print(context)
+        # print(context)
         return context
     
 

@@ -1,5 +1,30 @@
-{% comment %} {% extends 'blood/header.html' %} {% endcomment %}
+{% extends 'blood/login-header.html' %}
+{% load static %}
+
+{% block styles %}
+    {% include 'landing/stylesheets.html' %}
+{% endblock styles %}
 
 {% block content %}
-    {% include 'blood/navbar.html' %}
+    {% comment %} {% include 'blood/navbar.html' %} {% endcomment %}
+	<div class="container">
+        <div class="page-banner home-banner">
+          <div class="row align-items-center flex-wrap-reverse h-100">
+            <div class="col-md-6 py-5 wow fadeInLeft">
+              <h1 class="mb-4">Blood Bank Management System</h1>
+              <p class="text-lg text-grey mb-5">A web application for recording blood donations and requests</p>
+              <a href="{% url 'accts:login' %}" class="btn btn-accent btn-split">Get Started</a>
+            </div>
+            <div class="col-md-6 py-5 wow zoomIn">
+              <div class="img-fluid text-center">
+                <img src="{% static 'img/blood-donation.png' %}" width="470" alt="">
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+
+      {% include 'landing/scripts.html' %}
+    
 {% endblock content %}

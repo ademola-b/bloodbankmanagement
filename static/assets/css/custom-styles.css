@@ -11,6 +11,7 @@ http://creativecommons.org/licenses/by/3.0/
 body {
     font-family: 'Open Sans', sans-serif;
     background: #1F2837;
+    /* background: url('/static/img/bg.jpg') 50% 0 no-repeat fixed; */
 }
 
  #wrapper {
