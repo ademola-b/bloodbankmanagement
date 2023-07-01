@@ -18,7 +18,7 @@
 </nav>
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-    <li><a href="#"><i class="bx bxs-user"></i> My Profile</a></li>
+    <li><a href="{% url 'accts:profile' %}"><i class="bx bxs-user"></i> My Profile</a></li>
     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a></li> 
     <li><a href="{% url 'accts:logout' %}"><i class="bx bxs-door-open"></i> Logout</a></li>
 </ul>

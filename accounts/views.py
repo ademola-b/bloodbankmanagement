@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import redirect,render
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView
+from django.views.generic import CreateView, View
 
 from accounts.models import CustomUser
 from donor.models import Donor
@@ -118,6 +118,9 @@ class PatientCompleteReg(CreateView):
             messages(request, "An error occurred")
         
         return render(request, self.template_name, {'form':form})
+
+class ProfileView(View):
+    template_name = 'blood/profile.html'
 
 def login_request(request):
     if request.method == 'POST':
