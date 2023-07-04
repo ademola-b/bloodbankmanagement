@@ -1,7 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin 
 from django.db.models import Sum
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import ListView, DeleteView
 from django.shortcuts import render, redirect
@@ -46,24 +48,27 @@ class BloodStockView(LoginRequiredMixin, ListView):
         # print(context)
         return context
     
-    
 class DonorsView(LoginRequiredMixin, ListView):
     model = Donor
     template_name = 'admin/donors.html'
     context_object_name = 'donors'
 
-class DonorDelete(DeleteView):
-    # success_url
-    pass
+class DonorDelete(SuccessMessageMixin, DeleteView):
+    model = Donor
+    success_message = "Donor Successfully Deleted"
+    success_url = reverse_lazy("admin_page:donors")
+    
 
 class PatientsView(LoginRequiredMixin, ListView):
     model = Patient
     template_name = 'admin/patients.html'
     context_object_name = 'patients'
 
-class PatientDelete(DeleteView):
-    # success_url
-    pass
+class PatientDelete(SuccessMessageMixin, DeleteView):
+    model = Patient
+    success_message = "Patient Successfully deleted"
+    success_url = reverse_lazy("admin_page:patients")
+    
 
 class Donations(LoginRequiredMixin, ListView):
     model = BloodDonate
