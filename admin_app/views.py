@@ -1,16 +1,21 @@
+from typing import Any, Dict
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin 
 from django.db.models import Sum
+from django.db.models.query import QuerySet
+from django.forms.models import BaseModelForm
+from django.http import HttpResponse
 from django.urls import reverse_lazy
-from django.views import View
-from django.views.generic import ListView, DeleteView
+from django.views.generic import View, ListView, DeleteView, UpdateView
 from django.shortcuts import render, redirect
 
-from blood.models import BloodStock, BloodRequest
+from blood.models import BloodStock, BloodRequest, BloodDonateTest
 from donor.models import Donor, BloodDonate
 from patient.models import Patient
+
+from . forms import UpdateTestResultForm
 
 # Create your views here.
 
@@ -32,6 +37,7 @@ class HomePageView(ListView):
         context["approved_donations"] = BloodDonate.objects.filter(status='approved').count()
         context["rejected_donations"] = BloodDonate.objects.filter(status='rejected').count()
         context["bld"] = bld['unit__sum']
+        # context['test_form'] = self.form_class()
         # print(context)
         return context
     
@@ -71,9 +77,11 @@ class PatientDelete(SuccessMessageMixin, DeleteView):
     
 
 class Donations(LoginRequiredMixin, ListView):
-    model = BloodDonate
+    model = BloodDonateTest
     template_name = 'admin/donations.html'
-    context_object_name = 'donations'
+
+    def get_queryset(self):
+        return BloodDonateTest.objects.filter(status='approved')
 
 @login_required
 def approve_donation(request, pk):
@@ -99,6 +107,66 @@ def reject_donation(request, pk):
     messages.warning(request, 'Donation rejected')
     donation.save()
     return redirect('admin_page:donations')
+
+class DonationRequests(LoginRequiredMixin, ListView):
+    model = BloodDonateTest
+    template_name = "admin/donation_requests.html"
+    form_class = UpdateTestResultForm
+
+    def get_context_data(self, **kwargs: Any):
+        context = super().get_context_data(**kwargs)
+        context['form'] = UpdateTestResultForm()
+        return context
+
+class UpdateTestResult(LoginRequiredMixin, UpdateView):
+    model = BloodDonateTest
+    form_class = UpdateTestResultForm
+    template_name = 'admin/update_test_result.html'
+    success_message = "Donor's test has been updated, blood has also been donated"
+    success_url = reverse_lazy('admin_page:donation_requests')
+
+    def form_valid(self, form: BaseModelForm):
+
+        print(f"request: {self.request.POST}")
+
+        # perform the below only if has_surpassed return false
+        if not self.object.has_surpassed:
+            if self.object.status == 'pending':
+                if 'reject_btn' in self.request.POST:
+                    if self.object.reason == '':
+                        messages.warning(self.request, "Kindly state reason why you are rejecting the blood")
+                        return redirect('admin_page:update_test_result', self.object.test_id)
+                    else:
+                        donor = Donor.objects.get(id = self.object.donor.id)
+                        donor.bloodgroup = self.object.blood_group
+                        # save donor's bloodgroup
+                        self.object.pint_amount = form.cleaned_data.get('pint_amount')
+                        self.object.status = 'failed'
+                        self.object.save()
+
+                if 'approve' in self.request.POST:
+                    self.object.status = 'approved'
+                    stock = BloodStock.objects.get(bloodgroup = self.object.blood_group)
+                    print(f"stock: {stock}")
+                    stock.unit += self.object.pint_amount
+                    stock.save()
+                    self.object.save()
+                    messages.success(self.request, f"Test Updated Successfully, {self.object.pint_amount} has been donated")
+            elif self.object.status == 'approved':
+                messages.warning(self.request, "Donation already made")
+        else:
+            messages.warning(self.request, "Test can't be updated, as donor missed his/her scheduled time")
+
+
+        if not self.object.has_surpassed:
+            print(f"sur: {self.object.has_surpassed}")
+        else:
+            messages.warning(self.request, "Test Date exceeded")
+        return super().form_valid(form)
+
+    def form_invalid(self, form: BaseModelForm):
+        messages.warning(self.request, f"{form.errors.as_text()}")
+        return self.render_to_response(self.get_context_data(form=form))
 
 class Requests(LoginRequiredMixin, ListView):
     model = BloodRequest

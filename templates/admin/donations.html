@@ -5,7 +5,7 @@
 {% endblock title %}
 {% block head %}
 
-    {% comment %} <link href="{% static 'assets/css/bootstrap.css' %} " rel="stylesheet" /> {% endcomment %}
+    <link href="{% static 'assets/css/bootstrap.css' %} " rel="stylesheet" />
 {% endblock head %}
 
 {% block content %}
@@ -33,49 +33,31 @@
                             <div class="card-content">
                                 {% include 'blood/messages2.html' %}
                                 
-                            {% if donations %}
-                            <table class="table table-bordered table-striped centered">
-                                    
+                            {% if object_list %}
+                                <table class="table table-bordered table-striped centered">
                                     <tr>
-                                        <th>Donor's Name</th>
-                                        <th>Donor's Disease</th>
+                                        <th>Donor</th>
                                         <th>Bloodgroup</th>
-                                        <th>Unit</th>
+                                        <th>Pint Donated</th>
                                         <th>Status</th>
                                         <th>Action</th>
-                                        <th>Stock Status</th>
                                     </tr>
-                                    {% for donation in donations %}
+                                    {% for donation in object_list %}
                                         <tr>
-                                            <td> {{donation.donor.user.first_name|title}} {{donation.donor.user.last_name|title}} </td>
-                                            <td> {{donation.disease}} </td>
-                                            <td> {{donation.bloodgroup}} </td>
-                                            <td> {{donation.unit}} </td>
-                                            <td> {{donation.status}} </td>
-                                            {% if donation.status == 'pending' %}
-                                                <td> 
-                                                    <a href="{% url 'admin_page:approve_donation' donation.pk %}" class="btn btn-success">Approve</a> &emsp; 
-                                                    <a href="{% url 'admin_page:reject_donation' donation.pk %}" class="btn btn-danger">Reject</a> </td>
-                                            {% elif donation.status == 'approved' or donation.status == 'rejected' %}
-                                                    <td><a href="{% url 'admin_page:rollback_donation' donation.pk %}" class="btn btn-warning">Rollback</a></td>
-                                            {% else %}
-                                                <td>  </td>
-                                            {% endif %} </td>
-                                            {% if donation.status == 'approved' %}
-                                                <td> <span style ="background-color: green; color: white">{{donation.unit}} unit added to stock</span> </td> 
-                                            {% elif donation.status == 'rejected' %}
-                                                <td><span style ="background-color: blue; color: white">0 unit added to stock</span></td>
-                                            {% else %}
-                                                <td><span style ="background-color: orange; color: white">no action taken</span></td>    
-                                            {% endif %}
-                                           
+                                            <td> <a href="">{{donation.donor.user.first_name|title}} {{donation.donor.user.last_name|title}}</a>  </td>
+                                            <td> {{donation.blood_group}} </td>
+                                            <td> {{donation.pint_amount}} </td>
+                                            <td> {{donation.status}} </td>   
                                         </tr>
                                     {% endfor %}
-                            </table>
-                                        
-                                {% else %}
-                                    <h4>NO DONATIONS</h4>
-                                {% endif %}
+                                </table>            
+                            {% else %}
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h4 class="">NO DONATION HAS BEEN APPROVED</h4>
+                                    </div>
+                                </div>
+                            {% endif %}
                             </div>
                         </div>  
                     </div>

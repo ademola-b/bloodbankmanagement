@@ -27,7 +27,8 @@ class SignUpView(CreateView):
             # self.request.session['user'] = user.pk
             if form.cleaned_data['user_type'] == 'donor':
                 self.request.session['user'] = user.pk
-                return redirect('accts:donor_complete_reg')
+                messages.success(self.request, "Account successfully created, kindly login now")
+                return redirect('accts:login')
             elif form.cleaned_data['user_type'] == 'patient':
                 self.request.session['user'] = user.pk
                 return redirect('accts:patient_complete_reg')

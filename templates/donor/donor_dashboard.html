@@ -1,0 +1,129 @@
+<div id="page-inner">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-content">
+                    {% include 'blood/messages2.html' %}
+                <div class="card-title text-danger"><b>Blood Donation Requirements</b></div>
+                    <ul>
+                        <li><p>Be healthy and not suffering from a cold, flu or other illness at the time of donation.</p> </li>
+                        <li><p>Be aged between 18 and 75 years (other rules may apply if you are a current donor).</p></li>
+                        <li><p>Weigh at least 50kg.</p></li>
+                        <li><p>Have normal temperature and blood pressure.</p></li>
+                    </ul>
+                    <br>
+                    <span class="h5 text-danger"><b>Note: Proceed to donate blood if you meet above requirements</b></span>
+                    <br/>
+
+                    <br>
+
+                    <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#don">APPLY FOR DONATION</a>
+                    <div id="don" class="modal fade" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Blood Donation Request</h4>
+                            </div>
+                            <hr/>
+                            <div class="modal-body">
+                                <form method="post" action="" enctype="multipart/form-data" class="forms-sample">
+                                    {% csrf_token %}
+                                    {% for field in form %}
+                                        <div class="form-group">
+                                            {% if field.name.errors %}
+                                            <div class="alert alert-danger mt-2" role="alert">
+                                                {{ field.name.errors }}
+                                            </div>
+                                            {% endif %}
+                                            <label class="col-sm-4" style="font-size: 15px;" for="{{field.label}}">{{field.label}}</label>
+                                            {{field}}
+                                        </div>
+                                    {% endfor %}
+                                    
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div> 
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+</div>
+
+
+<!-- {% comment %} <div class="col-xs-12 col-sm-6 col-md-3">
+    <div class="card horizontal cardIcon waves-effect waves-dark">
+    <div class="card-image blue">
+    <i class="material-icons dp48">import_export</i>
+    </div>
+    <div class="card-stacked blue">
+    <div class="card-content">
+    <h3>{{donation_made}}</h3> 
+    </div>
+    <div class="card-action">
+    <strong>DONATIONS MADE</strong>
+    </div>
+    </div>
+    </div>
+
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-6 col-md-3">
+
+    <div class="card horizontal cardIcon waves-effect waves-dark">
+    <div class="card-image orange">
+    <i class="material-icons dp48">adjust</i>
+    </div>
+    <div class="card-stacked orange">
+    <div class="card-content">
+    <h3>{{pending_donation}}</h3> 
+    </div>
+    <div class="card-action">
+    <strong>PENDING DONATION</strong>
+    </div>
+    </div>
+    </div> 
+</div>
+<div class="col-xs-12 col-sm-6 col-md-3">
+
+        <div class="card horizontal cardIcon waves-effect waves-dark">
+    <div class="card-image green">
+    <i class="material-icons dp48">add_to_queue</i>
+    </div>
+    <div class="card-stacked green">
+    <div class="card-content">
+    <h3>{{approved_donation}}</h3> 
+    </div>
+    <div class="card-action">
+    <strong>APPROVED DONATIONS</strong>
+    </div>
+    </div>
+    </div> 
+    
+</div>
+<div class="col-xs-12 col-sm-6 col-md-3">
+
+    <div class="card horizontal cardIcon waves-effect waves-dark">
+        <div class="card-image red">
+        <i class="material-icons dp48">cancel</i>
+        </div>
+        <div class="card-stacked red">
+        <div class="card-content">
+        <h3>{{ rejected_donation }}</h3> 
+        </div>
+        <div class="card-action">
+        <strong>REJECTED DONATIONS</strong>
+        </div>
+        </div>
+        </div> 
+        
+    </div>
+</div> {% endcomment %} -->

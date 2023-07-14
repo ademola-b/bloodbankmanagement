@@ -25,163 +25,99 @@
 
 				<div class="dashboard-cards"> 
 					<div class="row">
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-							<div class="card-image blue">
-							<i class="material-icons dp48">import_export</i>
-							</div>
-							<div class="card-stacked blue">
-							<div class="card-content">
-							<h3>{{request_made}}</h3> 
-							</div>
-							<div class="card-action">
-							<strong>REQUEST MADE</strong>
-							</div>
-							</div>
-							</div>
-		
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-							<div class="card-image orange">
-							<i class="material-icons dp48">adjust</i>
-							</div>
-							<div class="card-stacked orange">
-							<div class="card-content">
-							<h3>{{pending_request}}</h3> 
-							</div>
-							<div class="card-action">
-							<strong>PENDING REQUEST</strong>
-							</div>
-							</div>
-							</div> 
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-							<div class="card-image green">
-							<i class="material-icons dp48">add_to_queue</i>
-							</div>
-							<div class="card-stacked green">
-							<div class="card-content">
-							<h3>{{approved_request}}</h3> 
-							</div>
-							<div class="card-action">
-							<strong>APPROVED REQUEST</strong>
-							</div>
-							</div>
-							</div> 
-							
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-								<div class="card-image red">
-								<i class="material-icons dp48">cancel</i>
-								</div>
-								<div class="card-stacked red">
-								<div class="card-content">
-								<h3>{{rejected_request}}</h3> 
-								</div>
-								<div class="card-action">
-								<strong>REJECTED REQUESTS</strong>
-								</div>
-								</div>
-								</div> 
-								
-							</div>
-						
-						<div class="col-xs-12 col-sm-6 col-md-3">
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-								<div class="card-image red">
-								<i class="material-icons dp48">supervisor_account</i>
-								</div>
-								<div class="card-stacked red">
-								<div class="card-content">
-								<h3>{{available_blood}}</h3> 
-								</div>
-								<div class="card-action">
-								<strong>Available Blood (Unit)</strong>
-								</div>
-								</div>
-								</div> 
-							</div>
-						</div>
 						{% if request.user.user_type == 'donor' %}
 						{% comment %} Donation Part {% endcomment %}
-						<div class="col-xs-12 col-sm-6 col-md-3">
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-							<div class="card-image blue">
-							<i class="material-icons dp48">import_export</i>
-							</div>
-							<div class="card-stacked blue">
-							<div class="card-content">
-							<h3>{{donation_made}}</h3> 
-							</div>
-							<div class="card-action">
-							<strong>DONATIONS MADE</strong>
-							</div>
-							</div>
-							</div>
-		
-							</div>
-						</div>
-						
+							{% include 'donor/donor_dashboard.html' %}
 
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-							<div class="card-image orange">
-							<i class="material-icons dp48">adjust</i>
-							</div>
-							<div class="card-stacked orange">
-							<div class="card-content">
-							<h3>{{pending_donation}}</h3> 
-							</div>
-							<div class="card-action">
-							<strong>PENDING DONATION</strong>
-							</div>
-							</div>
-							</div> 
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-								<div class="card horizontal cardIcon waves-effect waves-dark">
-							<div class="card-image green">
-							<i class="material-icons dp48">add_to_queue</i>
-							</div>
-							<div class="card-stacked green">
-							<div class="card-content">
-							<h3>{{approved_donation}}</h3> 
-							</div>
-							<div class="card-action">
-							<strong>APPROVED DONATIONS</strong>
-							</div>
-							</div>
-							</div> 
+						{% else %}
+							<div class="col-xs-12 col-sm-6 col-md-3">
 							
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-3">
-						
-							<div class="card horizontal cardIcon waves-effect waves-dark">
-								<div class="card-image red">
-								<i class="material-icons dp48">cancel</i>
+								<div class="card horizontal cardIcon waves-effect waves-dark">
+								<div class="card-image blue">
+								<i class="material-icons dp48">import_export</i>
 								</div>
-								<div class="card-stacked red">
+								<div class="card-stacked blue">
 								<div class="card-content">
-								<h3>{{ rejected_donation }}</h3> 
+								<h3>{{request_made}}</h3> 
 								</div>
 								<div class="card-action">
-								<strong>REJECTED DONATIONS</strong>
+								<strong>REQUEST MADE</strong>
+								</div>
+								</div>
+								</div>
+			
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-3">
+							
+								<div class="card horizontal cardIcon waves-effect waves-dark">
+								<div class="card-image orange">
+								<i class="material-icons dp48">adjust</i>
+								</div>
+								<div class="card-stacked orange">
+								<div class="card-content">
+								<h3>{{pending_request}}</h3> 
+								</div>
+								<div class="card-action">
+								<strong>PENDING REQUEST</strong>
+								</div>
+								</div>
+								</div> 
+							</div>
+
+							<div class="col-xs-12 col-sm-6 col-md-3">
+							
+								<div class="card horizontal cardIcon waves-effect waves-dark">
+								<div class="card-image green">
+								<i class="material-icons dp48">add_to_queue</i>
+								</div>
+								<div class="card-stacked green">
+								<div class="card-content">
+								<h3>{{approved_request}}</h3> 
+								</div>
+								<div class="card-action">
+								<strong>APPROVED REQUEST</strong>
 								</div>
 								</div>
 								</div> 
 								
 							</div>
-						
+							<div class="col-xs-12 col-sm-6 col-md-3">
+							
+								<div class="card horizontal cardIcon waves-effect waves-dark">
+									<div class="card-image red">
+									<i class="material-icons dp48">cancel</i>
+									</div>
+									<div class="card-stacked red">
+									<div class="card-content">
+									<h3>{{rejected_request}}</h3> 
+									</div>
+									<div class="card-action">
+									<strong>REJECTED REQUESTS</strong>
+									</div>
+									</div>
+									</div> 
+									
+								</div>
+							
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="card horizontal cardIcon waves-effect waves-dark">
+									<div class="card-image red">
+									<i class="material-icons dp48">supervisor_account</i>
+									</div>
+									<div class="card-stacked red">
+									<div class="card-content">
+									<h3>{{available_blood}}</h3> 
+									</div>
+									<div class="card-action">
+									<strong>Available Blood (Unit)</strong>
+									</div>
+									</div>
+									</div> 
+								</div>
+							</div>
 						{% endif %}
+						
+						
 					
 
 					</div>

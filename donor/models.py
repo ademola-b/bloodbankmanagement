@@ -2,9 +2,11 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 class Donor(models.Model):
-    user=models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
+    user=models.OneToOneField(get_user_model(), on_delete=models.CASCADE, related_name='donor')
     profile_pic= models.ImageField(upload_to='profile_pic/Donor/', null=True, blank=True)    
-    bloodgroup=models.CharField(max_length=10)
+    bloodgroup=models.CharField(max_length=10, null=True, blank=True)
+    age = models.DateTimeField(null=True, blank=True)
+    gender = models.CharField(max_length=8, choices=[('male', 'male'), ('female', 'female'), ('other', 'other')], default='other')
     address = models.CharField(max_length=70)
     mobile = models.CharField(max_length=20, null=False)
    

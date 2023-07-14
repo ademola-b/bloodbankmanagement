@@ -6,9 +6,9 @@
                 <li>
                     <a class="{% if request.path == '/donor/' %}active-menu{% endif %}  waves-effect waves-dark" href=" {% url 'donor:index' %}"><i class="bx bxs-dashboard bx-md"></i> Dashboard</a>
                 </li>
-                <li>
+                {% comment %} <li>
                     <a href="{% url 'donor:donate_blood' %}" class="{% if 'donate-blood' in request.path %}active-menu{% endif %} waves-effect waves-dark"><i class="bx bxs-donate-blood bx-md"></i> Donate Blood</a>
-                </li>
+                </li> {% endcomment %}
                 <li>
                     <a href="{% url 'donor:donation_history' %}" class="{% if 'donation-history' in request.path %}active-menu{% endif %}waves-effect waves-dark"><i class="bx bx-history bx-md"></i> Donate History</a>
                 </li>
@@ -16,25 +16,14 @@
                 <li>
                     <a class="{% if request.path == '/patient/' %}active-menu{% endif %} waves-effect waves-dark" href=" {% url 'patient:index' %}"><i class="bx bxs-dashboard bx-md"></i> Dashboard</a>
                 </li>
+                 <li>
+                    <a href="{% url 'patient:request_history' %}" class="{% if 'request-history' in request.path %}active-menu{% endif %} waves-effect waves-dark"><i class="bx bx-history bx-md"></i> Request History</a>
+                </li>
+                <li>
+                    <a href="{% url 'patient:available_blood' %}" class="{% if 'available-blood' in request.path %}active-menu{% endif %} waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Available Blood Donations</a>
+                </li>
             {% endif %}
 
-            {% comment %} Patient Aside Bar {% endcomment %}
-            <li>
-                <a href="{% url 'patient:request_history' %}" class="{% if 'request-history' in request.path %}active-menu{% endif %} waves-effect waves-dark"><i class="bx bx-history bx-md"></i> Request History</a>
-            </li>
-            <li>
-                <a href="{% url 'patient:available_blood' %}" class="{% if 'available-blood' in request.path %}active-menu{% endif %} waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Available Blood Donations</a>
-            </li>
-            
-            {% comment %} <li>
-                <a href="#" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Make Request</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect waves-dark"><i class="fa fa-desktop"></i> Request History</a>
-            </li>
-            <li>
-                <a href="#" class="waves-effect waves-dark"><i class="fa fa-bar-chart-o"></i> Available Blood Donations</a>
-            </li> {% endcomment %}
             
         </ul>
 

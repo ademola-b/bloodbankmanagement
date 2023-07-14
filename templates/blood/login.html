@@ -15,6 +15,8 @@
                 <div class="card">
                     <div class="card-content">
                         <form method="POST" class="col s12">
+                            <h5 class="text-warning">Login to your account to gain access to the system</h5>
+                            <hr>
                             {% include 'blood/messages.html' %}
 
                             {% if form.errors %}
@@ -27,7 +29,15 @@
                                 {{ field.label }} {{field}}
                                 <br>
                             {% endfor %}
-                            <button type="submit" class="btn btn-primary">LOGIN</button>
+                            <div class="row mx-auto">
+                                <div class="col-3">
+                                    <button type="submit" class="btn btn-primary">LOGIN</button>
+                                </div>
+                                <div class="col-9">
+
+                                    <h6 class="text-primary float-right"><b><a href="{% url 'accts:sign_up' %}">click here to register if you don't have an account</a> </b></h6>
+                                </div>
+                            </div>
                         </form>
                     </div>
                 </div>  

@@ -10,6 +10,12 @@ urlpatterns = [
     path('donors/delete/<int:pk>/', views.DonorDelete.as_view(), name='delete_donor'),
     path('patients/', views.PatientsView.as_view(), name='patients'),
     path('patients/delete/<int:pk>/', views.PatientDelete.as_view(), name='delete_patient'),
+    path('donation-requests/', views.DonationRequests.as_view(), name='donation_requests'),
+    path('donation-requests/test-update/<str:pk>/', views.UpdateTestResult.as_view(), name='update_test_result'),
+   
+   
+   
+   
     path('donations/', views.Donations.as_view(), name='donations'),
     path('approve-donation/<int:pk>/', views.approve_donation, name='approve_donation'),
     path('reject-donation/<int:pk>/', views.reject_donation, name='reject_donation'),

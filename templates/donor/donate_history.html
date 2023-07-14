@@ -15,9 +15,9 @@
                         My Donations
                     </h1>
                 <ol class="breadcrumb">
-                    <li><a href="#">Home</a></li>
-                    <li><a href="{% url 'donor:donate_blood' %}">Make Donation</a></li>
-                    <li class="active">My Donations</li>
+                    <li><a href="{% url 'donor:index' %}">Home</a></li>
+                    {% comment %} <li><a href="{% url 'donor:donate_blood' %}">Make Donation</a></li> {% endcomment %}
+                    <li class="active">My Donation Requests</li>
                 </ol> 
                                 
             </div>
@@ -27,27 +27,31 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-content">
+                                <h4 class="text-warning">The table below is a list of donation requests you've made including your blood test details</h4>
+                                <br><br>
+                                
+                                <span class="h5 text-danger mb-4">Note: Endeavour not to miss your test date, as you will be rescheduled if you miss</span>
+                                <br><br>
+
                                 {% if donations %}
-                                <table class="table table-bordered" style="padding: 100px;">
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Date</th>
-                                        <th>Disease</th>
-                                        <th>Bloodgroup</th>
-                                        <th>Unit</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    {% for don in donations %}
+                                    <table class="table table-bordered" style="padding: 100px;">
                                         <tr>
-                                            <td> {{don.donor.get_name}} </td>
-                                            <td> {{don.date}} </td>
-                                            <td> {{don.disease}} </td>
-                                            <td> {{don.bloodgroup}} </td>
-                                            <td> {{don.unit}} </td>
-                                            <td> {{don.status}} </td>
-                                        </tr>     
-                                    {% endfor %}
-                                </table>
+                                            <th>Test Date</th>
+                                            <th>Bloodgroup</th>
+                                            <th>Pint Donated</th>
+                                            <th>Status</th>
+                                            <th>Reason</th>
+                                        </tr>
+                                        {% for don in donations %}
+                                            <tr>
+                                                <td> {{don.test_date}} </td>
+                                                <td> {{don.blood_group}} </td>
+                                                <td> {{don.pint_amount}} </td>
+                                                <td> {{don.status}} </td>
+                                                <td> {{don.reason}} </td>
+                                            </tr>     
+                                        {% endfor %}
+                                    </table>
                                 {% else %}
                                     <h4>YOU HAVE NOT MADE ANY DONATIONS</h4>
                                 {% endif %}
